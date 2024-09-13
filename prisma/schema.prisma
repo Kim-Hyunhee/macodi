@@ -1,0 +1,232 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id                   Int                   @id @default(autoincrement())
+  userName             String                @unique
+  password             String
+  name                 String
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @default(now()) @updatedAt
+}
+
+model Job {
+  id                   Int                   @id @default(autoincrement())
+  name                 String
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @default(now()) @updatedAt
+}
+
+model User {
+  id                   Int                   @id @default(autoincrement())
+  userName             String                @unique   
+  password             String
+  name                 String
+  phoneNumber          String
+  email                String
+  companyName          String?
+  address              String?
+  status               Boolean               @default(true)
+  isAgree              Boolean               @default(false)
+  job                  String
+  isClosed             Boolean               @default(false)
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @default(now()) @updatedAt
+
+  projects             Project[]
+}
+
+model Company {
+  id                   Int                   @id @default(autoincrement())
+  userName             String                @unique   
+  password             String
+  name                 String
+  contactNumber        String
+  email                String
+  managerName          String
+  managerNumber        String
+  site                 String?
+  license              String
+  isAgree              Boolean               @default(false)
+  address              String
+  status               Boolean               @default(false)
+  job                  String
+  isClosed             Boolean               @default(false)
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @default(now()) @updatedAt
+  
+  projects             Project[]
+  inquiries            Inquiry[]
+}
+
+model Store {
+  id                   Int                   @id @default(autoincrement())
+  userName             String                @unique      
+  password             String
+  email                String
+  managerNumber        String
+  contactNumber        String?
+  companyName          String
+  managerName          String
+  owner                String
+  address              String
+  factoryAddress       String?
+  storageAddress       String?
+  companySite          String?
+  license              String?
+  status               Boolean               @default(true)
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @default(now()) @updatedAt
+
+  products             Product[]
+}
+
+model Category {
+  id                   Int                   @id @default(autoincrement())
+  name                 String
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @default(now()) @updatedAt
+
+  products             Product[]
+}
+
+model Location {
+  id                   Int                   @id @default(autoincrement())
+  name                 String
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @default(now()) @updatedAt
+  
+  products             Product[]
+}
+
+model Purpose {
+  id                   Int                   @id @default(autoincrement())
+  name                 String
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @default(now()) @updatedAt
+
+  products             Product[]
+}
+
+model Product {
+  id                   Int                   @id @default(autoincrement())
+  storeId              Int
+  categoryId           Int   
+  subCategory          String
+  image                String
+  name                 String
+  code                 String
+  manufacturer         String
+  origin               String
+  country              String
+  price                Int 
+  isShowPrice          Boolean               @default(true)
+  isShow               Boolean               @default(true)  
+  glossiness           String
+  locationId           Int?
+  purposeId            Int?
+  feature              String?
+  url                  String?               @db.Text
+  status               Boolean               @default(true)
+  applyProject         Int                   @default(0)
+  sampleInquiry        Int                   @default(0)
+  download             Int                   @default(0)
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @default(now()) @updatedAt
+
+  category             Category              @relation(fields: [categoryId], references: [id])
+  location             Location?             @relation(fields: [locationId], references: [id])
+  purpose              Purpose?              @relation(fields: [purposeId], references: [id])
+  store                Store                 @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  options              ProductOption[]
+}
+
+model Project {
+  id                   Int                   @id @default(autoincrement())
+  name                 String
+  userId               Int?
+  companyId            Int?
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @default(now()) @updatedAt
+  
+  user                 User?                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  company              Company?              @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  scenes               Scene[]
+  inquiries            Inquiry[]
+}
+
+model Scene {
+  id                   Int                   @id @default(autoincrement())
+  title                String
+  projectId            Int
+  image                String
+  position             Int?
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @default(now()) @updatedAt
+  
+  project              Project               @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  pins                 Pin[]
+}
+
+model Pin {
+  id                   Int                   @id @default(autoincrement())
+  sceneId              Int
+  xCoordinate          String
+  yCoordinate          String
+  productOptionId      Int
+  squareMeasure        Int?
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @default(now()) @updatedAt
+  
+  scene                Scene                 @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+  productOption        ProductOption         @relation(fields: [productOptionId], references: [id], onDelete: Cascade)
+  inquiryPins          InquiryPin[]
+}
+
+model Inquiry {
+  id                   Int                   @id @default(autoincrement())
+  projectId            Int
+  receiver             String
+  address              String
+  contactNumber        String
+  companyId            Int
+  inquiryNumber        String
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @default(now()) @updatedAt
+
+  company              Company               @relation(fields: [companyId],references: [id], onDelete: Cascade)
+  project              Project               @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  inquiryPins          InquiryPin[]
+}
+
+model InquiryPin {
+  id                   Int                   @id @default(autoincrement())
+  pinId                Int
+  inquiryId            Int
+  isCompleted          Boolean               @default(false)
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @default(now()) @updatedAt
+
+  pin                  Pin                   @relation(fields: [pinId], references: [id], onDelete: Cascade)
+  inquiry              Inquiry               @relation(fields: [inquiryId],references: [id], onDelete: Cascade)
+}
+
+model ProductOption {
+  id                   Int                   @id @default(autoincrement())
+  size                 String
+  price                Int
+  productId            Int
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @default(now()) @updatedAt
+
+  product              Product               @relation(fields: [productId], references: [id], onDelete: Cascade)
+  pins                 Pin[]
+}
+

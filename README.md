@@ -49,31 +49,150 @@
 <div markdown="1">
  
 ```bash
-─prisma
+├─prisma
+│      schema.prisma
+│
 ├─src
+│  │  app.controller.ts
+│  │  app.module.ts
+│  │  app.service.ts
+│  │  main.ts
+│  │
 │  ├─decorators
+│  │      userRoleAndId.decorator.ts
+│  │
 │  ├─helper
+│  │      ai.module.ts
+│  │      excel.download.ts
+│  │      randomCode.ts
+│  │
 │  └─module
 │      ├─admin
+│      │      admin.controller.ts
+│      │      admin.module.ts
+│      │      admin.repository.ts
+│      │      admin.service.ts
+│      │      type.ts
+│      │
 │      ├─aligo
+│      │      aligo.module.ts
+│      │      aligo.service.ts
+│      │
 │      ├─auth
+│      │      admin.guard.ts
+│      │      auth.module.ts
+│      │      auth.service.ts
+│      │      jwt-auth.guard.ts
+│      │      jwt.strategy.ts
+│      │      type.ts
+│      │
 │      ├─category
+│      │      category.controller.ts
+│      │      category.module.ts
+│      │      category.repository.ts
+│      │      category.service.ts
+│      │      type.ts
+│      │
 │      ├─company
+│      │      company.controller.ts
+│      │      company.module.ts
+│      │      company.respository.ts
+│      │      company.service.ts
+│      │      type.ts
+│      │
 │      ├─inquiry
+│      │      inquiry.controller.ts
+│      │      inquiry.module.ts
+│      │      inquiry.repository.ts
+│      │      inquiry.service.ts
+│      │      type.ts
+│      │
 │      ├─job
+│      │      job.controller.ts
+│      │      job.module.ts
+│      │      job.repository.ts
+│      │      job.service.ts
+│      │      type.ts
+│      │
 │      ├─location
+│      │      location.controller.ts
+│      │      location.module.ts
+│      │      location.repository.ts
+│      │      location.service.ts
+│      │
 │      ├─partnership
+│      │      partnership.controller.ts
+│      │      partnership.module.ts
+│      │      partnership.service.ts
+│      │      type.ts
+│      │
 │      ├─pin
+│      │      pin.controller.ts
+│      │      pin.module.ts
+│      │      pin.repository.ts
+│      │      pin.service.ts
+│      │      type.ts
+│      │
 │      ├─prisma
+│      │      prisma.module.ts
+│      │      prisma.service.ts
+│      │
 │      ├─product
+│      │      product.controller.ts
+│      │      product.module.ts
+│      │      product.repository.ts
+│      │      product.service.ts
+│      │      type.ts
+│      │
 │      ├─product-option
+│      │      product-option.controller.ts
+│      │      product-option.module.ts
+│      │      product-option.repository.ts
+│      │      product-option.service.ts
+│      │      type.ts
+│      │
 │      ├─project
+│      │      project.controller.ts
+│      │      project.module.ts
+│      │      project.repository.ts
+│      │      project.service.ts
+│      │      type.ts
+│      │
 │      ├─purpose
+│      │      purpose.controller.ts
+│      │      purpose.module.ts
+│      │      purpose.repository.ts
+│      │      purpose.service.ts
+│      │
 │      ├─scene
+│      │      scene.controller.ts
+│      │      scene.module.ts
+│      │      scene.repository.ts
+│      │      scene.service.ts
+│      │      type.ts
+│      │
 │      ├─store
+│      │      store.controller.ts
+│      │      store.module.ts
+│      │      store.repository.ts
+│      │      store.service.ts
+│      │      type.ts
+│      │
 │      ├─upload
+│      │      upload.controller.ts
+│      │      upload.module.ts
+│      │      upload.service.ts
+│      │
 │      └─user
+│              type.ts
+│              user.controller.ts
+│              user.module.ts
+│              user.repository.ts
+│              user.service.ts
+│
 └─test
+        app.e2e-spec.ts
+        jest-e2e.json
 ```
 </div>
 </details>

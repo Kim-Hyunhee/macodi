@@ -250,6 +250,6 @@
  ## **Swagger 문서**
 API 명세는 Swagger를 통해 확인할 수 있습니다. 아래 링크를 클릭하여 Swagger 문서로 이동하세요.
 
-[Swagger 문서 보러 가기](https://github.com/user-attachments/assets/b5d3491c-08ad-400a-9767-2611ffd14721)
+[Swagger 문서 보러 가기](https://github.com/user-attachments/assets/29147c49-eaa2-4a55-b778-bf4f1f73b554)
 
 ---
